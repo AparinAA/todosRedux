@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducer';
 import { sayHiOnDispatch, includeMeaningOfLife } from './exampleAddons/enhancers';
-import { print1, print2, print3 } from './exampleAddons/middleware';
+import { print1, print2, print3, customMiddleware } from './exampleAddons/middleware';
 
 let preloadedState;
 const persistedTodosString = localStorage.getItem('todos');
-const middleware = [print1, print2, print3];
+const middleware = [print1, print2, print3, customMiddleware];
 const enhancers = [sayHiOnDispatch, includeMeaningOfLife];
 const reducer = rootReducer;
 
