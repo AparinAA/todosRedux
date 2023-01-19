@@ -1,1 +1,3 @@
-App Todos using React + Redux lib
+## Learing App
+
+### App Todos using React + Redux lib
