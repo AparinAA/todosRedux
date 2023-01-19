@@ -1,7 +1,6 @@
-// TODO change createStore
 import { configureStore } from '@reduxjs/toolkit';
-// import { createStore } from 'redux';
 import rootReducer from './reducer';
+import { sayHiOnDispatch, includeMeaningOfLife } from './exampleAddons/enhancers';
 
 let preloadedState;
 const persistedTodosString = localStorage.getItem('todos');
@@ -13,7 +12,6 @@ if (persistedTodosString) {
 }
 
 // TODO 
-const store = configureStore({ reducer: rootReducer, preloadedState });
-// const store = createStore(rootReducer, preloadedState);
+const store = configureStore({ reducer: rootReducer, preloadedState, enhancers: [sayHiOnDispatch, includeMeaningOfLife] });
 
 export default store;

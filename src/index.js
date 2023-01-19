@@ -13,18 +13,10 @@ const unsubscribe = store.subscribe(() =>
   console.info("State after dispatch:", store.getState())
 );
 
-const unsubscribe2 = store.subscribe(() =>
-  console.info("State after dispatch 2:", store.getState())
-);
-
 store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' });
 
+console.info("After: ", store.getState());
 unsubscribe();
-
-store.dispatch({ type: 'todos/todoToggled', payload: 0 });
-
-unsubscribe2();
-console.info('Final state:', store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
