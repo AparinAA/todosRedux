@@ -212,7 +212,7 @@ main h2 {
   text-rendering: optimizeLegibility;
 }
 
-:focus {
+:focus,:active {
   outline: 0;
 }
 
