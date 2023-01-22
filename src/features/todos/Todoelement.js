@@ -1,15 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-function Todoelement(props) {
-    const { id, text } = props.todo;
+const selectTodoById = (state, id) => {
+    return state.todos.find(todo => todo.id === id);
+}
 
+function Todoelement({ id }) {
+    const { text } = useSelector(state => selectTodoById(state, id));
     return (
-        <div>
-            <label htmlFor={id}>
-                <input type="checkbox" id={id} />
-                {text}
-            </label>
-        </div>
+        <li>
+            <div className='view'>
+                <label htmlFor={id}>
+                    <input type="checkbox" id={id} />
+                    {text}
+                </label>
+            </div>
+        </li>
     );
 }
 

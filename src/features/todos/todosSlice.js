@@ -1,7 +1,7 @@
 const initialState = [
-    // { id: 0, text: 'Learn React', completed: true },
-    // { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
-    // { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
+    { id: 0, text: 'Learn React', completed: true },
+    { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
+    { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
 ];
 
 const ACTION_TYPE = {
@@ -18,13 +18,13 @@ export default function todosReducer(state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPE.todos_todoAdded:
             return [
-                ...state,
                 {
                     id: nextTodoId(state),
                     text: action.payload,
                     completed: false
-                }
-            ]
+                },
+                ...state
+            ];
         case ACTION_TYPE.todos_todoToggled:
             return state.map(todo => {
                 if (todo.id !== action.payload) {
