@@ -7,7 +7,7 @@ const selectTodos = state => state.todos.map(todo => todo.id);
 function Todolist(props) {
     const todosId = useSelector(selectTodos, shallowEqual);
     const renderedListItems = todosId.map((id) => {
-        return <Todoelement key={id} id={id} />
+        return <Todoelement key={id} id={id} props={props} />
     })
     return (
         <ul className="todo-list">{renderedListItems}</ul>
