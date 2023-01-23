@@ -34,7 +34,8 @@ function Todoelement({ id }) {
                     className="toggle"
                     type="checkbox"
                     id={id}
-                    onClick={handlerChangeCompleted}
+                    checked={completed}
+                    onChange={handlerChangeCompleted}
                 />
                 <label className="todo-text" htmlFor={id}>{text}</label>
 

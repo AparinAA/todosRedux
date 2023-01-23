@@ -1,5 +1,5 @@
 const initialState = [
-    { id: 0, text: 'Learn React', completed: false },
+    { id: 0, text: 'Learn React', completed: true },
     { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
     { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
 ];
@@ -8,7 +8,9 @@ const ACTION_TYPE = {
     'todos_todoAdded': 'todos/todoAdded',
     'todos_todoToggled': 'todos/todoToggled',
     'todos_todoDeleted': 'todos/todoDeleted',
-    'todos_todoChangeColor': 'todos/todoChangeColor'
+    'todos_todoChangeColor': 'todos/todoChangeColor',
+    'todos_todoClearCompleted': 'todos/todoClearCompleted',
+    'todos_todoChangeAllCompleted': 'todos/todoChangeAllCompleted'
 };
 
 function nextTodoId(todos) {
@@ -51,7 +53,13 @@ export default function todosReducer(state = initialState, action) {
                     ...todo,
                     color
                 }
-            })
+            });
+        case ACTION_TYPE.todos_todoChangeAllCompleted:
+            return state.map(todo => {
+                return { ...todo, completed: action.payload };
+            });
+        case ACTION_TYPE.todos_todoClearCompleted:
+            return state.filter(todo => !todo.completed);
         default:
             return state;
     };

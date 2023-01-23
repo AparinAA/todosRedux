@@ -1,9 +1,9 @@
 import React from "react";
-import filtersReducer from '../filters/filtersSlice';
+import { StatusFilters } from '../filters/filtersSlice';
 
 const StatusFilter = ({ value: status, onChange }) => {
-    const renderedFilters = Object.keys(filtersReducer).map((key) => {
-        const value = filtersReducer[key]
+    const renderedFilters = Object.keys(StatusFilters).map((key) => {
+        const value = StatusFilters[key]
         const handleClick = () => onChange(value)
         const className = value === status ? 'selected' : ''
 
