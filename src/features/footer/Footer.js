@@ -12,11 +12,14 @@ const Footer = () => {
     const allLengthTodo = useSelector(state => state.todos.length);
     const { status, colors } = useSelector(state => state.filters)
 
-    const onColorChange = (color, changeType) =>
-        console.log('Color change: ', { color, changeType })
-    const handlerStatusChange = (status) => console.log('Status change: ', status)
-
     const dispatch = useDispatch();
+
+    const onColorChange = (color, changeType) => console.log('Color change: ', { color, changeType })
+
+    const handlerStatusChange = (status) => {
+        dispatch({ type: 'filters/statusFilterChanged', payload: status })
+    };
+
 
     const handlerClearCompleted = () => {
         if (remaingLength !== allLengthTodo)

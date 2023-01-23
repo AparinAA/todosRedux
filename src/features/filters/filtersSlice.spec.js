@@ -1,17 +1,17 @@
 import { test } from 'node:test';
 import * as assert from 'node:assert';
 import filtersReducer from './filtersSlice.js';
-
+import { StatusFilters } from './filtersSlice.js';
 
 test('Status filter change', () => {
     const initialState = {
-        status: 'All',
+        status: 'all',
         colors: []
     };
-    const status = 'Checked';
-    const action = { type: 'filters/statusFilterChanged', payload: status };
 
-    const result = filtersReducer(initialState, action);
+    const statusList = Object.values(StatusFilters);
 
-    assert.strictEqual('Checked', result.status);
+    const result = statusList.map(status => filtersReducer(initialState, { type: 'filters/statusFilterChanged', payload: status }));
+
+    assert.deepEqual(statusList, result.map(r => r.status));
 })
