@@ -1,7 +1,9 @@
+import { client } from '../../api/client';
+
 const initialState = [
-    { id: 0, text: 'Learn React', completed: true },
-    { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
-    { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
+    // { id: 0, text: 'Learn React', completed: true },
+    // { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
+    // { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
 ];
 
 const ACTION_TYPE = {
@@ -10,7 +12,8 @@ const ACTION_TYPE = {
     'todos_todoDeleted': 'todos/todoDeleted',
     'todos_todoChangeColor': 'todos/todoChangeColor',
     'todos_todoClearCompleted': 'todos/todoClearCompleted',
-    'todos_todoChangeAllCompleted': 'todos/todoChangeAllCompleted'
+    'todos_todoChangeAllCompleted': 'todos/todoChangeAllCompleted',
+    'todos_todosLoaded': 'todos/todosLoaded'
 };
 
 function nextTodoId(todos) {
@@ -60,7 +63,18 @@ export default function todosReducer(state = initialState, action) {
             });
         case ACTION_TYPE.todos_todoClearCompleted:
             return state.filter(todo => !todo.completed);
+        case ACTION_TYPE.todos_todosLoaded:
+            return action.payload;
         default:
             return state;
     };
+}
+
+export async function fetchTodos(dispatch, getState) {
+    client.get('/fakeApi/todos').then(res => {
+        console.info("!1");
+        dispatch({ type: 'todos/todosLoaded', payload: res.todos });
+        console.info("!2");
+    })
+    console.info("!")
 }

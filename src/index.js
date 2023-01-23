@@ -8,11 +8,16 @@ import './api/server'
 
 import store from './store';
 
+import { fetchTodos } from './features/todos/todosSlice';
+
 const unsubscribe = store.subscribe(() =>
 	console.info("State after dispatch:", store.getState())
 );
 
+store.dispatch(fetchTodos);
+
 unsubscribe();
+
 
 ReactDOM.render(
 	<React.StrictMode>

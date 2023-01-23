@@ -3,9 +3,9 @@ export const sayHiOnDispatch = (createStore) => {
     const store = createStore(rootReducer, preloadedState, enhancers)
 
     function newDispatch(action) {
-      const result = store.dispatch(action)
-      console.log('Hi!')
-      return result
+      console.log('Hi!');
+      store.dispatch(action)
+      return;
     }
 
     return { ...store, dispatch: newDispatch }

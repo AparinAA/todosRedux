@@ -2,7 +2,22 @@ import React from 'react';
 import Todoelement from './Todoelement';
 import { useSelector, shallowEqual } from 'react-redux';
 
-const selectTodos = state => state.todos.map(todo => todo.id);
+const selectTodos = state => {
+    const { status } = state.filters;
+    let tempStateTodos;
+    switch (status) {
+        case 'completed':
+            tempStateTodos = state.todos.filter(todo => todo.completed);
+            break;
+        case 'active':
+            tempStateTodos = state.todos.filter(todo => todo.color);
+            break;
+        default:
+            tempStateTodos = state.todos;
+    }
+
+    return tempStateTodos.map(todo => todo.id);
+}
 
 function Todolist(props) {
     console.info("Re-rendering TodoList");
