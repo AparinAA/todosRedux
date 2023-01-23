@@ -3,15 +3,15 @@ import * as assert from 'node:assert';
 import filtersReducer from './filtersSlice.js';
 import { StatusFilters } from './filtersSlice.js';
 
-test('Status filter change', () => {
-    const initialState = {
-        status: 'all',
-        colors: []
-    };
+Object.values(StatusFilters).forEach(status => {
+    test(`Status filter change to '${status}'`, () => {
+        const initialState = {
+            status: 'StatusFilters.All',
+            colors: []
+        };
 
-    const statusList = Object.values(StatusFilters);
+        const result = filtersReducer(initialState, { type: 'filters/statusFilterChanged', payload: status });
 
-    const result = statusList.map(status => filtersReducer(initialState, { type: 'filters/statusFilterChanged', payload: status }));
-
-    assert.deepEqual(statusList, result.map(r => r.status));
+        assert.deepStrictEqual(status, result.status);
+    })
 })
