@@ -16,21 +16,11 @@ const ACTION_TYPE = {
     'todos_todosLoaded': 'todos/todosLoaded'
 };
 
-function nextTodoId(todos) {
-    const maxId = todos.reduce((maxId, curTodos) => Math.max(maxId, curTodos.id), -1);
-    return maxId + 1;
-}
-
 export default function todosReducer(state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPE.todos_todoAdded:
             return [
-                ...state,
-                {
-                    id: nextTodoId(state),
-                    text: action.payload,
-                    completed: false
-                },
+                ...state, action.payload
             ];
         case ACTION_TYPE.todos_todoToggled:
             return state.map(todo => {
@@ -71,10 +61,28 @@ export default function todosReducer(state = initialState, action) {
 }
 
 export async function fetchTodos(dispatch, getState) {
+    console.info("fetch data");
     client.get('/fakeApi/todos').then(res => {
         console.info("!1");
         dispatch({ type: 'todos/todosLoaded', payload: res.todos });
         console.info("!2");
     })
     console.info("!")
+}
+
+export function saveFetchTodos(text) {
+    return async function innerHandler(dispatch, getState) {
+        console.info("save data");
+        const initial = { text };
+        client.post('/fakeApi/todos', { todo: initial })
+            .then(res => {
+                if (res.todo) {
+                    dispatch({ type: 'todos/todoAdded', payload: res.todo });
+                } else {
+                    throw Error("Todo hasn't added");
+                }
+            })
+            .catch(e => console.info(e));
+
+    }
 }

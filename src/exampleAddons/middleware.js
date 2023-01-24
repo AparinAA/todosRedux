@@ -33,3 +33,11 @@ export function customMiddleware(storeAPI) {
 		}
 	}
 }
+
+export const asyncThunkMiddleware = storeAPI => next => action => {
+	console.info(typeof action);
+	if (typeof action === 'function') {
+		return action(storeAPI.dispatch, storeAPI.getState);
+	}
+	return next(action);
+}

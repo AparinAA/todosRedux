@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as TimesSolid } from './time-solid.svg';
 import { availableColors, capitalize } from '../filters/colors';
+import ReactMarkdown from 'react-markdown';
 
 const selectTodoById = (state, id) => {
     return state.todos.find(todo => todo.id === id);
@@ -37,7 +38,16 @@ function Todoelement({ id }) {
                     checked={completed}
                     onChange={handlerChangeCompleted}
                 />
-                <label className="todo-text" htmlFor={id}>{text}</label>
+
+                <label className="todo-text" htmlFor={id}>
+                    <ReactMarkdown
+                        children={text}
+                        components={{
+                            p: React.Fragment,
+                            h1: React.Fragment
+                        }}
+                    />
+                </label>
 
                 <select
                     className="colorPicker"

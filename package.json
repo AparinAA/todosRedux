@@ -12,9 +12,13 @@
     "miragejs": "^0.1.35",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-markdown": "^8.0.5",
     "react-scripts": "3.4.3",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
+    "remark-gfm": "^3.0.1",
+    "remarkable": "^2.0.1",
+    "remarkable-react": "^1.4.3",
     "seedrandom": "^3.0.5"
   },
   "scripts": {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { saveFetchTodos } from '../todos/todosSlice';
 
 function Header(props) {
     const [text, setText] = useState('')
@@ -8,10 +9,11 @@ function Header(props) {
     const handleKeyDown = e => {
         const trimmedText = text.trim();
         if (e.which === 13 && trimmedText) {
-            dispatch({ type: 'todos/todoAdded', payload: trimmedText });
+            dispatch(saveFetchTodos(trimmedText));
             setText('');
         }
     }
+
     return (
         <header className="header">
             <input
