@@ -22,7 +22,6 @@ const Footer = () => {
     const dispatch = useDispatch();
 
     const onColorChange = (color, changeType) => {
-
         colorFilters(color, changeType);
     }
 

@@ -39,5 +39,5 @@ export const asyncThunkMiddleware = storeAPI => next => action => {
 	if (typeof action === 'function') {
 		return action(storeAPI.dispatch, storeAPI.getState);
 	}
-	return next(action);
+	return new Promise((res, rej) => res(next(action)));
 }

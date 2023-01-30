@@ -149,7 +149,7 @@ export function saveFetchTodos(text) {
     return async function innerHandler(dispatch, getState) {
         console.info("save data");
         const initial = { text };
-        client.post('/fakeApi/todos', { todo: initial })
+        return client.post('/fakeApi/todos', { todo: initial })
             .then(res => {
                 if (res.todo) {
                     dispatch(todoAdded(res.todo));
