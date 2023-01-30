@@ -2,19 +2,29 @@ import React from 'react';
 import ColorFilters from './ColorFilters';
 import StatusFilter from './StatusFilter';
 import RemainingTodos from './RemainingTodos';
+import { colorFilters } from '../filters/filtersSlice';
+import { selectTodos } from '../todos/todosSlice';
+import { createSelector } from 'reselect';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-const remaingTodosFilter = state => state.todos.filter(todo => !todo.completed).length;
+const remaingTodosFilter = createSelector(
+    selectTodos,
+    todos => todos.filter(todo => !todo.completed).length
+);
 
 const Footer = () => {
     const remaingLength = useSelector(remaingTodosFilter);
-    const allLengthTodo = useSelector(state => state.todos.length);
+    const todo = useSelector(selectTodos);
+    const allLengthTodo = todo.length;
     const { status, colors } = useSelector(state => state.filters)
 
     const dispatch = useDispatch();
 
-    const onColorChange = (color, changeType) => console.log('Color change: ', { color, changeType })
+    const onColorChange = (color, changeType) => {
+
+        colorFilters(color, changeType);
+    }
 
     const handlerStatusChange = (status) => {
         dispatch({ type: 'filters/statusFilterChanged', payload: status })

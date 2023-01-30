@@ -1,27 +1,17 @@
 import React from 'react';
 import Todoelement from './Todoelement';
-import { useSelector, shallowEqual } from 'react-redux';
-
-const selectTodos = state => {
-    const { status } = state.filters;
-    let tempStateTodos;
-    switch (status) {
-        case 'completed':
-            tempStateTodos = state.todos.filter(todo => todo.completed);
-            break;
-        case 'active':
-            tempStateTodos = state.todos.filter(todo => todo.color);
-            break;
-        default:
-            tempStateTodos = state.todos;
-    }
-
-    return tempStateTodos.map(todo => todo.id);
-}
+import { useSelector } from 'react-redux';
+import { selectFilteredTodoIds } from './todosSlice';
 
 function Todolist(props) {
     console.info("Re-rendering TodoList");
-    const todosId = useSelector(selectTodos, shallowEqual);
+    const todosId = useSelector(selectFilteredTodoIds);
+    const loadingStatus = useSelector(state => state.todos.status);
+
+    if (loadingStatus === 'loading') {
+        return <div className='todo-list'><div className="loader" /></div>
+    }
+
     const renderedListItems = todosId.map((id) => {
         return <Todoelement key={id} id={id} props={props} />
     })

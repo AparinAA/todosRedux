@@ -19,6 +19,7 @@
     "remark-gfm": "^3.0.1",
     "remarkable": "^2.0.1",
     "remarkable-react": "^1.4.3",
+    "reselect": "^4.1.7",
     "seedrandom": "^3.0.5"
   },
   "scripts": {

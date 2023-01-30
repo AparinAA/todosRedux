@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as TimesSolid } from './time-solid.svg';
 import { availableColors, capitalize } from '../filters/colors';
 import ReactMarkdown from 'react-markdown';
-
-const selectTodoById = (state, id) => {
-    return state.todos.find(todo => todo.id === id);
-}
+import { selectTodoById } from './todosSlice';
 
 function Todoelement({ id }) {
     const todo = useSelector(state => selectTodoById(state, id));

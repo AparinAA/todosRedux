@@ -14,7 +14,7 @@ const unsubscribe = store.subscribe(() =>
 	console.info("State after dispatch:", store.getState())
 );
 
-store.dispatch(fetchTodos);
+store.dispatch(fetchTodos());
 
 unsubscribe();
 
